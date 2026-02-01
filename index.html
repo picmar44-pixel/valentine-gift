@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Mammam</title>
+<style>
+body {
+background-color: #fff0f3;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+margin: 0;
+overflow: hidden;
+text-align: center;
+}
+
+#container {
+background: white;
+padding: 2rem;
+border-radius: 20px;
+box-shadow: 0 10px 25px rgba(255, 182, 193, 0.5);
+max-width: 400px;
+width: 90%;
+transition: all 0.5s ease;
+}
+
+h1 { color: #ff4d6d; margin-bottom: 10px; }
+p { color: #590d22; font-size: 1.2rem; min-height: 60px; }
+
+.buttons {
+display: flex;
+justify-content: center;
+gap: 20px;
+margin-top: 20px;
+position: relative;
+}
+
+button {
+padding: 12px 25px;
+font-size: 1rem;
+border: none;
+border-radius: 50px;
+cursor: pointer;
+transition: transform 0.2s;
+}
+
+#yesBtn { background-color: #ff4d6d; color: white; }
+#noBtn { background-color: #ffb3c1; color: #590d22; position: relative; }
+
+#congrats {
+display: none;
+color: #ff4d6d;
+}
+
+.heart {
+color: #ff4d6d;
+font-size: 50px;
+margin-bottom: 10px;
+}
+</style>
+</head>
+<body>
+
+<div id="container">
+<div class="heart">❤️</div>
+<div id="game-content">
+<h1 id="title">Hey Mammam...</h1>
+<p id="question">Ready for a little journey of us?</p>
+<div class="buttons">
+<button id="yesBtn" onclick="nextQuestion()">Yes</button>
+<button id="noBtn" onclick="wrongAnswer()">No</button>
+</div>
+</div>
+
+<div id="congrats">
+<h1>Congratulations Mammam! 🌸</h1>
+<p>You've won my heart (again). You are the most beautiful person in my world. I love you forever!</p>
+<div style="font-size: 40px;">💍✨🥰</div>
+</div>
+</div>
+
+<script>
+let currentStep = 0;
+const questions = [
+"Do you know how much I love you?",
+"Do I make you the happiest girl?",
+"Will you stay by my side forever?",
+"Are we the perfect match?",
+"Do you like my surprises?",
+"Is your smile my favorite thing?",
+"Do you think about me before sleeping?",
+"Will you go on a thousand more dates with me?",
+"Am I your favorite person?",
+"Final Question: Will you be mine forever?"
+];
+
+const title = document.getElementById('title');
+const questionText = document.getElementById('question');
+const yesBtn = document.getElementById('yesBtn');
+const noBtn = document.getElementById('noBtn');
+const gameContent = document.getElementById('game-content');
+const congrats = document.getElementById('congrats');
+
+function nextQuestion() {
+if (currentStep < questions.length) {
+title.innerText = `Question ${currentStep + 1}`;
+questionText.innerText = questions[currentStep];
+currentStep++;
+} else {
+showSuccess();
+}
+}
+
+function wrongAnswer() {
+alert("Wrong answer, Mammam! Try
