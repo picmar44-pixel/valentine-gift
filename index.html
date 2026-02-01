@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Mammam</title>
+<style>
+:root {
+--primary: #ff4d6d;
+--secondary: #ffb3c1;
+--bg: #fff0f3;
+}
+
+body {
+background-color: var(--bg);
+font-family: 'Arial', sans-serif;
+margin: 0;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+overflow: hidden;
+}
+
+#card {
+background: white;
+padding: 40px;
+border-radius: 30px;
+box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
+text-align: center;
+width: 350px;
+position: relative;
+z-index: 10;
+}
+
+.heart-icon {
+font-size: 50px;
+color: var(--primary);
+margin-bottom: 20px;
+animation: beat 1s infinite;
+}
+
+@keyframes beat {
+0% { transform: scale(1); }
+50% { transform: scale(1.1); }
+100% { transform: scale(1); }
+}
+
+h1 { color: var(--primary); font-size: 24px; margin-bottom: 10px; }
+p { color: #590d22; font-size: 18px; margin-bottom: 30px; min-height: 50px; }
+
+.btn-container {
+display: flex;
+justify-content: center;
+gap: 15px;
+height: 50px;
+}
+
+button {
+padding: 10px 25px;
+border: none;
+border-radius: 25px;
+font-weight: bold;
+cursor: pointer;
+transition: 0.3s;
+}
+
+#yesBtn {
+background-color: var(--primary);
+color: white;
+font-size: 16px;
+}
+
+#noBtn {
+background-color: var(--secondary);
+color: var(--primary);
+position: relative; /* Essential for moving */
+}
+
+#congrats {
+display: none;
+}
+
+.confetti {
+position: fixed;
+width: 10px;
+height: 10px;
+background-color: #f00;
+z-index: 1;
+}
+</style>
+</head>
+<body>
+
+<div id="card">
+<div class="heart-icon">❤️</div>
+
+<div id="quiz-section">
+<h1 id="headerText">Hi Mammam!</h1>
+<p id="questionText">I have 10 things to ask you... Ready?</p>
+<div class="btn-container">
+<button id="yesBtn">Yes</button>
+<button id="noBtn">No</button>
+</div>
+</div>
+
+<div id="congrats">
+<h1>Yay! 🌸</h1>
+<p>Congratulations Mammam! You've passed the test. You are officially the queen of my heart forever!</p>
+<p style="font-size: 12px; opacity: 0.6;">(Try clicking 'No' now... if you can! 😉)</p>
+</div>
+</div>
+
+<script>
+const questions = [
+"Do you know you're the prettiest girl ever?",
+"Do you like our late-night talks?",
+"Will you hold my hand forever?",
+"Do I make you smile every day?",
+"Is our love your favorite story?",
+"Will you be my Valentine every year?",
+"Do you love me more than chocolate?",
+"Am I your favorite person to annoy?",
+"Are we meant to be together?",
+"Final Question: Will you love me forever?"
+];
+
+let currentQ = 0;
+let gameFinished = false;
+
+const yesBtn = document.getElementById('yesBtn');
+const noBtn = document.getElementById('noBtn');
+const questionText = document.getElementById('questionText');
+const headerText = document.getElementById('headerText');
+const quizSection = document.getElementById('quiz-section');
+const congratsSection = document.getElementById('congrats');
+
+// Yes Button Logic
+yesBtn.addEventListener('click', () => {
+if (currentQ < questions.length) {
+headerText.innerText = `Question ${currentQ + 1}`;
+questionText.innerText = questions[currentQ];
+currentQ++;
+} else {
+// Winning State
+quizSection.style.display = "none";
+congratsSection.style.display = "block";
+document.body.style.backgroundColor = "#ffc8dd";
+gameFinished = true;
+
+// Add the runaway button to the screen globally
+noBtn.style.position = "absolute";
+document.body.appendChild(noBtn);
+}
+});
+
+// No Button Logic
+noBtn.addEventListener('click', () => {
+if (!gameFinished) {
+alert("Mammam! 'No' is not an option! Choose Yes ❤️");
+}
+});
+
+// The "Impossible to touch" logic
+noBtn.addEventListener('mouseover', () => {
+if (gameFinished) {
+const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+
+noBtn.style.left = `${x}px`;
+noBtn.style.top = `${y}px`;
+}
+});
+</script>
+</body>
+</html>
